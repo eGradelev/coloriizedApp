@@ -26,13 +26,23 @@ class ViewController: UIViewController {
     
     @IBAction func redSliderAction() {
         redMeaning.text = String(format: "%.2f", redSlider.value)
+        settingColorOfView()
     }
     @IBAction func greenSliderAction() {
         greenMeaning.text = String(format: "%.2f", greenSlider.value)
+        settingColorOfView()
     }
     @IBAction func blueSliderAction() {
         blueMeaning.text = String(format: "%.2f", blueSlider.value)
-        
+        settingColorOfView()
+    }
+    private func settingColorOfView() {
+        mainView.backgroundColor = UIColor(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: 1
+        )
     }
 }
 
