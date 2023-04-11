@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet var mainView: UIView!
     
@@ -22,27 +22,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 20
+        setColor()
+        
+        redMeaning.text = string(from: redSlider)
+        greenMeaning.text = string(from: greenSlider)
+        blueMeaning.text = string(from: blueSlider)
     }
     
-    @IBAction func redSliderAction() {
-        redMeaning.text = String(format: "%.2f", redSlider.value)
-        settingColorOfView()
+    
+    @IBAction func sliderAction(_ sender: UISlider) {
+        setColor()
+        switch sender {
+        case redSlider:
+            redMeaning.text = string(from: redSlider)
+        case greenSlider:
+            greenMeaning.text = string(from: greenSlider)
+        default:
+            blueMeaning.text = string(from: blueSlider)
+        }
     }
-    @IBAction func greenSliderAction() {
-        greenMeaning.text = String(format: "%.2f", greenSlider.value)
-        settingColorOfView()
-    }
-    @IBAction func blueSliderAction() {
-        blueMeaning.text = String(format: "%.2f", blueSlider.value)
-        settingColorOfView()
-    }
-    private func settingColorOfView() {
+    
+    private func setColor() {
         mainView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
             alpha: 1
         )
+    }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
 }
 
